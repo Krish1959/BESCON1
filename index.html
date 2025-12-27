@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Avatar Agentic AI Pte Ltd.</title>
+
+  <style>
+    :root { color-scheme: light dark; }
+
+    * { box-sizing: border-box; }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.35;
+      padding: max(16px, env(safe-area-inset-top))
+               max(16px, env(safe-area-inset-right))
+               max(16px, env(safe-area-inset-bottom))
+               max(16px, env(safe-area-inset-left));
+      display: flex;
+      justify-content: center;
+      background: #0b0f17;
+      color: #eef2ff;
+    }
+
+    .container{
+      width: 100%;
+      max-width: 520px;
+    }
+
+    header{
+      text-align: center;
+      margin: 10px 0 14px;
+    }
+
+    h1{
+      margin: 0;
+      font-size: clamp(22px, 5.2vw, 34px);
+      letter-spacing: 0.2px;
+    }
+
+    h2{
+      margin: 6px 0 0;
+      font-weight: 500;
+      font-size: clamp(14px, 3.6vw, 18px);
+      opacity: 0.9;
+    }
+
+    .frame{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 10px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+
+    /* Default: landscape-friendly */
+    .ratio{
+      --ar: 16 / 9;
+      aspect-ratio: var(--ar);
+      width: 100%;
+      max-height: 72vh;          /* prevents too-tall frame */
+      overflow: hidden;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.25);
+    }
+
+    /* Portrait phones: make it taller (better use of vertical space) */
+    @media (max-width: 600px) and (orientation: portrait){
+      .ratio{
+        --ar: 9 / 16;            /* portrait aspect ratio */
+        max-height: 74vh;        /* still keeps room for header */
+      }
+    }
+
+    iframe{
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .note{
+      margin-top: 10px;
+      font-size: 12px;
+      opacity: 0.75;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <header>
+      <h1>Avatar Agentic AI Pte Ltd.</h1>
+      <h2>Q&amp;A on BESCON</h2>
+    </header>
+
+    <section class="frame">
+      <div class="ratio">
+        <iframe
+          src="https://embed.liveavatar.com/v1/4ece469c-1f59-4a75-9ae4-cb80c8f65f5c"
+          allow="microphone"
+          title="LiveAvatar Embed"
+        ></iframe>
+      </div>
+    </section>
+
+    <div class="note">Tip: Allow microphone access when prompted.</div>
+  </main>
+</body>
+</html>
