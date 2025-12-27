@@ -24,7 +24,6 @@
         env(safe-area-inset-left);
     }
 
-    /* Full screen layout */
     .container{
       min-height: 100dvh;
       display: flex;
@@ -54,50 +53,32 @@
       opacity: 0.9;
     }
 
-    /*
-      Key change:
-      - Let the frame take almost the entire screen height
-      - Remove aspect-ratio wrapper
-      - "3x" effect: zoom the iframe content 3 times while still fitting inside the frame
-    */
+    /* Frame takes ~90% of the visible screen height */
     .frame{
-      flex: 1;
-      min-height: 0;
-
+      height: 90dvh;
       border-radius: 18px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.14);
       box-shadow: 0 10px 34px rgba(0,0,0,0.35);
       padding: 10px;
-
-      /* Make sure it uses ~90%+ of the screen */
-      height: 88dvh;
     }
 
+    /* No zoom. Just a clean container */
     .iframe-shell{
       width: 100%;
       height: 100%;
       border-radius: 14px;
       overflow: hidden;
       background: rgba(0,0,0,0.25);
-      position: relative;
     }
 
-    /* 3x "bigger" (zoom) */
-    .iframe-shell{
-      --zoom: 3;
-    }
-
+    /* Map exactly to HeyGen’s suggested 16:9 */
     iframe{
+      width: 100%;
+      height: 100%;
       border: 0;
       display: block;
-
-      /* Fit after scaling */
-      width: calc(100% / var(--zoom));
-      height: calc(100% / var(--zoom));
-
-      transform: scale(var(--zoom));
-      transform-origin: 0 0;
+      aspect-ratio: 16 / 9;
     }
 
     .note{
@@ -120,7 +101,7 @@
     <section class="frame">
       <div class="iframe-shell">
         <iframe
-          src="https://embed.liveavatar.com/v1/4ece469c-1f59-4a75-9ae4-cb80c8f65f5c"
+          src="https://embed.liveavatar.com/v1/d932b937-0cc2-452f-b28a-2692f90b3d4a"
           allow="microphone"
           title="LiveAvatar Embed"
         ></iframe>
