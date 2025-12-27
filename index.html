@@ -9,103 +9,68 @@
     :root { color-scheme: light dark; }
 
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    html, body { 
+      height: 100%; 
+      margin: 0; 
+      overflow: hidden; /* Prevents unwanted scrolling on mobile */
+    }
 
-    body{
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
       background: #0b0f17;
       color: #eef2ff;
-
-      padding:
-        env(safe-area-inset-top)
-        env(safe-area-inset-right)
-        env(safe-area-inset-bottom)
-        env(safe-area-inset-left);
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
 
-    /* Full screen layout */
-    .container{
-      min-height: 100dvh;
+    .container {
+      height: 100dvh;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      padding: 12px;
       max-width: 980px;
       margin: 0 auto;
-    }
-
-    header{
-      text-align: center;
-      padding-top: 6px;
-    }
-
-    h1{
-      margin: 0;
-      font-size: clamp(20px, 5.8vw, 40px);
-      font-weight: 700;
-      letter-spacing: 0.2px;
-    }
-
-    h2{
-      margin: 6px 0 0;
-      font-size: clamp(14px, 3.6vw, 20px);
-      font-weight: 500;
-      opacity: 0.9;
-    }
-
-    /*
-      Key change:
-      - Let the frame take almost the entire screen height
-      - Remove aspect-ratio wrapper
-      - "3x" effect: zoom the iframe content 3 times while still fitting inside the frame
-    */
-    .frame{
-      flex: 1;
-      min-height: 0;
-
-      border-radius: 18px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: 0 10px 34px rgba(0,0,0,0.35);
       padding: 10px;
-
-      /* Make sure it uses ~90%+ of the screen */
-      height: 88dvh;
     }
 
-    .iframe-shell{
+    header {
+      text-align: center;
+      flex-shrink: 0; /* Ensures header doesn't shrink */
+      padding: 10px 0;
+    }
+
+    h1 { margin: 0; font-size: clamp(18px, 5vw, 32px); }
+    h2 { margin: 4px 0 0; font-size: 14px; opacity: 0.8; }
+
+    /* The Frame now occupies the majority of the screen */
+    .frame {
+      flex-grow: 1; /* Takes up all available vertical space */
+      min-height: 70dvh; 
+      border-radius: 20px;
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .iframe-shell {
       width: 100%;
       height: 100%;
-      border-radius: 14px;
-      overflow: hidden;
-      background: rgba(0,0,0,0.25);
-      position: relative;
     }
 
-    /* 3x "bigger" (zoom) */
-    .iframe-shell{
-      --zoom: 3;
-    }
-
-    iframe{
+    iframe {
+      width: 100%;
+      height: 100%;
       border: 0;
       display: block;
-
-      /* Fit after scaling */
-      width: calc(100% / var(--zoom));
-      height: calc(100% / var(--zoom));
-
-      transform: scale(var(--zoom));
-      transform-origin: 0 0;
+      /* Removed aspect-ratio to allow vertical expansion */
     }
 
-    .note{
-      margin: 0;
+    .note {
       text-align: center;
       font-size: 12px;
-      opacity: 0.75;
-      padding-bottom: 2px;
+      opacity: 0.7;
+      padding-bottom: 5px;
+      flex-shrink: 0;
     }
   </style>
 </head>
@@ -120,7 +85,7 @@
     <section class="frame">
       <div class="iframe-shell">
         <iframe
-          src="https://embed.liveavatar.com/v1/4ece469c-1f59-4a75-9ae4-cb80c8f65f5c"
+          src="https://embed.liveavatar.com/v1/d932b937-0cc2-452f-b28a-2692f90b3d4a"
           allow="microphone"
           title="LiveAvatar Embed"
         ></iframe>
