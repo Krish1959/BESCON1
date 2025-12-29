@@ -8,84 +8,87 @@
         body {
             margin: 0;
             padding: 0;
-            /* Dark background matching the screenshot */
-            background-color: #12141c; 
+            background-color: #12141c; /* Matches the dark UI in your screenshot */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            color: white;
         }
 
         .header {
             text-align: center;
-            padding: 25px 15px 15px 15px;
+            padding: 30px 15px 10px 15px;
             width: 100%;
         }
 
-        h1 { margin: 0; font-size: 1.4rem; color: #ffffff; font-weight: 600; }
-        h2 { margin: 5px 0; font-size: 1rem; color: #b0b3c7; font-weight: 400; }
-        h3 { margin: 5px 0; font-size: 0.9rem; color: #a1a4b9; font-weight: 400; }
+        h1 { margin: 0; font-size: 1.4rem; font-weight: 600; letter-spacing: -0.5px; }
+        h2 { margin: 5px 0; font-size: 1rem; color: #a1a4b9; font-weight: 400; }
+        h3 { margin: 2px 0; font-size: 0.9rem; color: #8a8d9e; font-weight: 400; text-transform: uppercase; }
 
         .container {
-            width: 100%;
-            /* Fluid width for mobile, but don't get too wide on tablets */
-            max-width: 500px; 
-            display: flex;
-            justify-content: center;
-            padding: 10px;
-            box-sizing: border-box;
+            width: 95%;
+            max-width: 450px; /* Optimized for iPhone 16/Samsung Portrait width */
+            margin-top: 10px;
         }
 
-        /* This wrapper defines the visible area (the "frame") */
+        /* The Frame */
         .video-wrapper {
             position: relative;
             width: 100%;
-            /* Maintain a 16:9 aspect ratio for the container box */
-            padding-bottom: 56.25%; 
+            padding-bottom: 56.25%; /* Maintains 16:9 container aspect */
             height: 0;
-            /* CRITICAL: This cuts off the parts of the video we zoom past */
-            overflow: hidden; 
-            border-radius: 20px; /* Rounded corners like the screenshot */
-            background: #000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden; /* This performs the crop */
+            border-radius: 24px;
+            background: #2a2c35; /* Subtle background for loading state */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        /* Styling the HeyGen Iframe inside the wrapper */
+        /* The Iframe with Bottom-Anchored Zoom */
         .video-wrapper iframe {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            bottom: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             border: none;
+
+            /* --- BOTTOM ANCHOR ZOOM --- */
+            /* We zoom in from the bottom center so controls stay visible */
+            transform-origin: bottom center;
             
-            /* --- THE ZOOM TRICK --- */
-            /* 1. Move the iframe so its center aligns with the container's center */
-            translate: -50% -50%;
-            /* 2. Scale it up. 1.8 (180%) seems good to fill a portrait into landscape.
-               Adjust this number (e.g., 1.5 or 2.0) if you need more/less zoom. */
-            transform: scale(1.8); 
-            /* Ensure zooming happens from the center */
-            transform-origin: center center;
+            /* Scale of 1.7 to 1.8 effectively fills the landscape 16:9 
+               box with the portrait avatar while keeping buttons at the bottom */
+            transform: scale(1.75); 
+        }
+
+        .footer-tip {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #636677;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>Avatar Agentic AI Pte Ltd.</h1>
+        <h1>Avatar Agentic AI Pte Ltd</h1>
+        <h2>Singapore</h2>
         <h3>Q&A on BESCON</h3>
     </div>
 
     <div class="container">
         <div class="video-wrapper">
             <iframe 
-                src="https://embed.liveavatar.com/v1/36c4f29c-870f-49be-9df9-f9753a7d3cb9" 
+                src="https://embed.liveavatar.com/v1/248a432f-175f-47ee-87b2-6ef0c97df76a" 
                 allow="microphone" 
                 title="LiveAvatar Embed">
-                style="aspect-ratio: 9/27;"
             </iframe>
+        </div>
+        <div class="footer-tip">
+            Tip: Allow microphone access when prompted.
         </div>
     </div>
 
