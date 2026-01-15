@@ -2,97 +2,224 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Avatar Agentic AI Pte Ltd</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BESCON - AI Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background-color: #12141c; /* Matches the dark UI in your screenshot */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            color: white;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
         }
-
-        .header {
-            text-align: center;
-            padding: 30px 15px 10px 15px;
-            width: 100%;
-        }
-
-        h1 { margin: 0; font-size: 1.4rem; font-weight: 600; letter-spacing: -0.5px; }
-        h2 { margin: 5px 0; font-size: 1rem; color: #a1a4b9; font-weight: 400; }
-        h3 { margin: 2px 0; font-size: 0.9rem; color: #8a8d9e; font-weight: 400; text-transform: uppercase; }
 
         .container {
-            width: 95%;
-            max-width: 450px; /* Optimized for iPhone 16/Samsung Portrait width */
-            margin-top: 10px;
-        }
-
-        /* The Frame */
-        .video-wrapper {
-            position: relative;
+            max-width: 480px;
             width: 100%;
-            padding-bottom: 56.25%; /* Maintains 16:9 container aspect */
-            height: 0;
-            overflow: hidden; /* This performs the crop */
-            border-radius: 24px;
-            background: #2a2c35; /* Subtle background for loading state */
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            backdrop-filter: blur(10px);
         }
 
-        /* The Iframe with Bottom-Anchored Zoom */
-        .video-wrapper iframe {
-            position: absolute;
-            bottom: -15%;
-            left: 0;
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #555;
+            letter-spacing: 6px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .avatar-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .avatar-frame {
             width: 100%;
             height: 100%;
             border: none;
-
-            /* --- BOTTOM ANCHOR ZOOM --- */
-            /* We zoom in from the bottom center so controls stay visible */
-            transform-origin: bottom center;
-            
-            /* Scale of 1.7 to 1.8 effectively fills the landscape 16:9 
-               box with the portrait avatar while keeping buttons at the bottom */
-            transform: scale(1.45); 
         }
 
-        .footer-tip {
-            margin-top: 20px;
-            font-size: 0.8rem;
-            color: #636677;
-            text-align: center;
+        .instruction-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .instruction-secondary {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #666;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .instruction-note {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: #888;
+            font-style: italic;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            margin: 25px auto;
+            border-radius: 2px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+
+            .title {
+                font-size: 3rem;
+                letter-spacing: 6px;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+                letter-spacing: 4px;
+            }
+
+            .avatar-container {
+                height: 350px;
+            }
+
+            .instruction-main {
+                font-size: 1.5rem;
+            }
+
+            .instruction-secondary {
+                font-size: 0.9rem;
+            }
+
+            .instruction-note {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .title {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                letter-spacing: 3px;
+            }
+
+            .avatar-container {
+                height: 300px;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div class="header">
-        <h1>Avatar Agentic AI Pte Ltd</h1>
-        <h2>Singapore</h2>
-        <h3>Q&A on BESCON</h3>
-    </div>
-
     <div class="container">
-        <div class="video-wrapper"> 
-
-            <iframe src="https://embed.liveavatar.com/v1/c5f8d295-887a-4938-8727-24ce3aa40d10"
-                allow="microphone" 
-                title="LiveAvatar 
-                Embed" style="aspect-ratio: 16/9;">
+        <h1 class="title">BESCON</h1>
+        <p class="subtitle">Singapore</p>
+        
+        <div class="avatar-container">
+            <iframe 
+                class="avatar-frame"
+                src="https://labs.heygen.com/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiJKdW5lX0hSX3B1YmxpYyIsInByZXZpZXdJ%0D%0AbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3YzLzc0NDQ3YTI3ODU5YTQ1NmM5%0D%0ANTVlMDFmMjFlZjE4MjE2XzQ1NjIwL3ByZXZpZXdfdGFsa18xLndlYnAiLCJuZWVkUmVtb3ZlQmFj%0D%0Aa2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6ImVhNjlmNTFlZDg5ZDQxMmU4ODQ1OGIw%0D%0AYWM0ZTczYTYzIiwidXNlcm5hbWUiOiI3MGI5MDJmNGNlODY0ZDEyYjhhYzdmOTAyNWIyNzg1NSJ9&inIFrame=1"
+                allow="microphone"
+                allowfullscreen
+                title="Bescon AI Assistant">
             </iframe>
+        </div>
 
-        </div>
-        <div class="footer-tip">
-            Tip: Allow microphone access when prompted.
-        </div>
+        <div class="divider"></div>
+
+        <p class="instruction-main">Ask Any Questions about Bescon</p>
+        
+        <p class="instruction-secondary">Keep Mic OFF all the time unless you are speaking.</p>
+        
+        <p class="instruction-note">System is very sensitive to background noise</p>
     </div>
-
 </body>
 </html>
